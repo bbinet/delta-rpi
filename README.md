@@ -7,7 +7,7 @@ device, e.g.: `./unset_serial_ctrlchars.sh /dev/ttyRPC0`
 
 ## Usage
 
-The `delta_rpi_m8a_simulator.py` script should be run with Python3 only (as the
+The `delta-rpi.py` script should be run with Python3 only (as the
 script is not compatible with Python2).
 
 The script can either work as an Delta RPI M8A RS485 simulator (slave mode) or
@@ -16,8 +16,8 @@ as a simple dataviewer (master mode).
 See the usage message below:
 
 ```
-    $ python3 delta_rpi_m8a_simulator.py -h
-    usage: delta_rpi_m8a_simulator.py [-h] [-a ADDRESS] [-d DEVICE] [-b BAUDRATE]
+    $ python3 delta-rpi.py -h
+    usage: delta-rpi.py [-h] [-a ADDRESS] [-d DEVICE] [-b BAUDRATE]
                                       [-t TIMEOUT] [--debug]
                                       MODE
     
@@ -40,7 +40,7 @@ So to simulate an inverter on a RaspberryPi with Raspicomm RS485 adapter
 (with rs485 address=1, serial port=/dev/ttyRPC0, baud rate=9600), you can run:
 
 ```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyRPC0 -b 9600 -a 1 slave
+    $ python3 delta-rpi.py -d /dev/ttyRPC0 -b 9600 -a 1 slave
 ```
 
 And to act as a dataviewer and retrieve data from an inverter on a RaspberryPi
@@ -48,7 +48,7 @@ with Raspicomm RS485 adapter (with rs485 address=1, serial port=/dev/ttyRPC0,
 baud rate=9600), you can run:
 
 ```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyRPC0 -b 9600 -a 1 master
+    $ python3 delta-rpi.py -d /dev/ttyRPC0 -b 9600 -a 1 master
 ```
 
 ## Testing both slave and master modes
@@ -64,16 +64,16 @@ create using socat:
 ```
 
 You can now use the `/dev/pts/2` and `/dev/pts/3` virtual serial ports to run
-the `delta_rpi_m8a_simulator.py` script in both master and slave mode.
+the `delta-rpi.py` script in both master and slave mode.
 
 Run the script in slave mode (inverter simulator) in a first terminal:
 ```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/pts/2 -b 9600 -a 1 slave
+    $ python3 delta-rpi.py -d /dev/pts/2 -b 9600 -a 1 slave
 ```
 
 Run the script in master mode in a second terminal:
 ```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/pts/3 -b 9600 -a 1 master
+    $ python3 delta-rpi.py -d /dev/pts/3 -b 9600 -a 1 master
 ```
 
 You should now see the slave and master sending/receiving dummy data.
