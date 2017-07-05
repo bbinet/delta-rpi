@@ -1,4 +1,4 @@
-# Delta RPI M8A RS485 simulator
+# Delta RPI M8A RS485 simulator/dataviewer
 
 Thanks to the https://github.com/lvzon/soliviamonitor/ project which has
 provided the crc checking code and a little shell-script that will put a device
