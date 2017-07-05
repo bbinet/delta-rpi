@@ -1,7 +1,9 @@
 # Delta RPI M8A RS485 simulator
 
-Thanks to the https://github.com/lvzon/soliviamonitor/ project which helped
-in the protocol understanding and crc checking algorithm.
+Thanks to the https://github.com/lvzon/soliviamonitor/ project which has
+provided the crc checking code and a little shell-script that will put a device
+into raw-mode and will undefine all special control characters on the specified
+device, e.g.: `./unset_serial_ctrlchars.sh /dev/ttyRPC0`
 
 ## Usage
 
@@ -9,7 +11,7 @@ The `delta_rpi_m8a_simulator.py` script should be run with Python3 only (as the
 script is not compatible with Python2).
 
 The script can either work as an Delta RPI M8A RS485 simulator (slave mode) or
-as a simple datalogger (master mode).
+as a simple dataviewer (master mode).
 
 See the usage message below:
 
@@ -19,7 +21,7 @@ See the usage message below:
                                       [-t TIMEOUT] [--debug]
                                       MODE
     
-    Delta inverter simulator (slave mode) or datalogger (master mode) for RPI M8A
+    Delta inverter simulator (slave mode) or dataviewer (master mode) for RPI M8A
     
     positional arguments:
       MODE         mode can either be "master" or "slave"
@@ -34,18 +36,19 @@ See the usage message below:
       --debug      show debug information
 ```
 
-So to simulate an inverter (with rs485 address=1, serial port=/dev/ttyUSB0,
+So to simulate an inverter on a RaspberryPi with Raspicomm RS485 adapter
+(with rs485 address=1, serial port=/dev/ttyRPC0, baud rate=9600), you can run:
+
+```
+    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyRPC0 -b 9600 -a 1 slave
+```
+
+And to act as a dataviewer and retrieve data from an inverter on a RaspberryPi
+with Raspicomm RS485 adapter (with rs485 address=1, serial port=/dev/ttyRPC0,
 baud rate=9600), you can run:
 
 ```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyUSB0 -b 9600 -a 1 slave
-```
-
-And to act as a datalogger and retrieve data of an inverter (with rs485
-address=1, serial port=/dev/ttyUSB0, baud rate=9600), you can run:
-
-```
-    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyUSB0 -b 9600 -a 1 master
+    $ python3 delta_rpi_m8a_simulator.py -d /dev/ttyRPC0 -b 9600 -a 1 master
 ```
 
 ## Testing both slave and master modes
